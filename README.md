@@ -67,7 +67,7 @@ _Caching_ happens in a number of places to speed up retrieval. It is still minim
 ### Quickstart
 1. Create the DBX tokens of the workspaces to administrate
 2. Store the tokens in an Azure key vault following the naming convention _\<workspace name\>-tk_ as key vault secret keys.
-3. Edit _dbx-admin-config.txt_ by entering the Key Vault name, workspace filters regex and the Azure regions.
+3. Edit _files/dbx-admin-config.txt_ by entering the Key Vault name, workspace filters regex and the Azure regions.
 4. Start the tool by running the main file _dbx-admin.ps1_ with Powershell. 
 
 The DBX-Admin Azure login has two modes: prod (default) & dev, controlled by the internal flag _$IS_DEV_, set in  _dbx-admin.ps1_ . In prod mode, the Login to Azure window will popup everytime the tool is started. In Dev mode, the user login context is saved locally, so as to avoid login everytime the tool intitiates. If the user password is changed however, the tool would need to switch temporarily to prod, to force the new login. Once this is done, the switch back to dev mode will save the new context locally. 
