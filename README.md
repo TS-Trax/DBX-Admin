@@ -15,7 +15,7 @@ Easier and speedier DBX admin tasks, such as:
 - Adding/Removing groups, including across workspaces. Copying groups with all their users to other workspaces.
 - Monitoring all the cluster states and providing actions like Start/Restart/Stop/Delete clusters. Copying librairies from one cluster to another.
 - Detecting orphaned users that do not belong to any group, and correct (either add to an existing group or remove)
-- Allows cross-subscription and cross-workspace administration & oversight, e.g. running clusters, job failures, VM types & DBS Runtime used.
+- Allows cross-subscription and cross-workspace administration & oversight, e.g. running clusters, job failures, VM types & DBX Runtime used.
 - Scales with the number of subscriptions, workspaces etc.
 - Dynamic and independent from the number of subscriptions, workspaces, groups, users and clusters – makes minimal assumptions
 - Secured via Azure AD login and Key Vault.
