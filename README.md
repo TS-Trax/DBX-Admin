@@ -21,10 +21,9 @@ Easier and speedier DBX admin tasks, such as:
 - Secured via Azure AD login and Key Vault.
 - Adaptable via configuration, i.e. specify Key Vault where secret DBX tokens are stored, Workspace list filters, etc.
 
-### Real world scenarions
+### Real world scenarios
 DBX-Admin has been used in several real-world use cases, like:
 #### User administration
-- Add/remove users in a given workspace
 - Add a new Data Scientist to all the corresponding groups in the different environments (Dev,Test, Prod)
 - Add a group of new Analysts on the project in all the corresponding groups and environments
 
