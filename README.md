@@ -11,9 +11,9 @@ Provide an extensible GUI for administrating Databricks (DBX) Workspaces, in ord
  
 ### Advantages
 Easier and speedier DBX admin tasks, such as:
-- Finding/Adding/Removing users, including across workspaces
-- Adding/Removing groups, including across workspaces
-- Monitoring all the cluster states and providing actions like Start/Restart/Stop/Delete clusters
+- Finding/Adding/Removing users, including across workspaces. 
+- Adding/Removing groups, including across workspaces. Copying groups with all their users to other workspaces.
+- Monitoring all the cluster states and providing actions like Start/Restart/Stop/Delete clusters. Copying librairies from one cluster to another.
 - Detecting orphaned users that do not belong to any group, and correct (either add to an existing group or remove)
 - Allows cross-subscription and cross-workspace administration & oversight, e.g. running clusters, job failures, VM types & DBS Runtime used.
 - Scales with the number of subscriptions, workspaces etc.
@@ -40,6 +40,7 @@ Instead of having to login to each workspace to add/remove each group or user, t
 - Works with DBX tokens only
 - Works with only two Azure regions at a time
 - The UI is mostly single-threaded, as secondary WPF windows need to be closed before switching back to the main window. That said, Powershell grid-views are being used wherever they make sense to address that particular limitation. Multi-threading is also being added to parts of the code needing instant refreshing (e.g. color change when cluster state  changes from stopped to started and vice-versa). 
+- The tool is limited by the capabilites of the DBX REST API and Powershell. 
 
 ### Credits
 This tool uses a couple of existing open-source Powershell DBX modules:
@@ -68,6 +69,9 @@ _Caching_ happens in a number of places to speed up retrieval. It is still minim
 2. Store the tokens in an Azure key vault following the naming convention _\<workspace name\>-tk_ as key vault secret keys.
 3. Edit _dbx-admin-config.txt_ by entering the Key Vault name, workspace filters regex and the Azure regions.
 4. Start the tool by running the main file _dbx-admin.ps1_ with Powershell. 
+
+The DBX-Admin Azure login has two modes: prod (default) & dev, controlled by the internal flag _$IS_DEV_, set in  _dbx-admin.ps1_ . In prod mode, the Login to Azure window will popup everytime the tool is started. In Dev mode, the user login context is saved locally, so as to avoid login everytime the tool intitiates. If the user password is changed however, the tool would need to switch temporarily to prod, to force the new login. Once this is done, the switch back to dev mode will save the new context locally. 
   
 **Note**: The start up process will be slow, specially the first time, since missing modules will need to be installed by the tool if not present. Subsequent starts will be faster, though the tool will still need to retrieve the tokens from the key vault each time it starts.
+
 
