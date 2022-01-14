@@ -4,10 +4,10 @@ MS Azure Databricks cross-workspace administration
 <img width="412" alt="image" src="https://user-images.githubusercontent.com/97665470/149491043-a90de3eb-2fa8-4634-839c-80cfb362448f.png">
 
 ### Motivation
-Provide an extensible GUI for administrating Databricks (DBX) Workspaces, in order to ease user administration and DBX jobs/clusters oversight.
+Provide an effective and extensible GUI for administrating & auditing Databricks (DBX) Workspaces, in order to ease user administration and DBX jobs/clusters oversight.
 
 ### License
-**GNU GPLv3** lets people do almost anything they want, _except distributing closed source versions_, as sharing improvements on this tool would be useful to everyone.
+**GNU GPLv3** lets people do almost anything they want, _except distributing closed source versions_, as sharing improvements on this tool would be useful to everyone. 
  
 ### Advantages
 Easier and speedier DBX admin tasks, such as:
