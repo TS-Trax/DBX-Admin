@@ -30,16 +30,17 @@ DBX-Admin has been used in several real-world use cases, like:
 
 Instead of having to login to each workspace to add/remove each group or user, the tool will insert/remove in bulk, and in seconds.
 #### Cluster/Jobs/VMs/Runtimes monitoring
-- Provide a list of clusters running right now in all or subset of workspaces
-- List all cluster/job failures in all or subset of workspaces
-- List all VM types used in all or subset of workspaces
-- List all the DBX runtime versions used in all or subset of workspaces
-- Generate an audit report in MS Word or plain text of the results obtained above in all or subset of workspaces.
+- Generate an audit report in MS Word (or plain text) of the results obtained below in all or subset (e.g., only prod) of workspaces:
+   - Provide a list of clusters running at this time, per workspace
+   - List all cluster/job failures per workspace
+   - List all the different VM types used per workspace
+   - List all the different DBX runtime versions used per workspace
 
 ### Present day limitations
 - Works only with MS Azure cloud 
 - Works with DBX tokens only
 - Works with only two Azure regions at a time
+- The UI is mostly single-threaded, as secondary WPF windows need to be closed before switching back to the main window. That said, Powershell grid-views are being used wherever they make sense to address that particular limitation. Multi-threading is also being added to parts of the code needing instant refreshing (e.g. color change when cluster state  changes from stopped to started and vice-versa). 
 
 ### Credits
 This tool uses a couple of existing open-source Powershell DBX modules:
