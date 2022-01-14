@@ -1,0 +1,23 @@
+# This is a comment. All config values are listed as key=value. 
+# The script will: 
+## 1. Ignore commented lines(start with '#') and new lines 
+## 2. Split only on the first occurrence of the character "=". Therefore any characters can be used in the value field
+## 3. Remove space characters from the beginning and end of the entries. Therefore "VARIABLE=VALUE" and "VARIABLE = VALUE" will return the same.
+## 4. Pick up all key-value pairs listed and create corresponding PS variables name-value
+## 5. Support the use of wildcards: https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_wildcards?view=powershell-7.1
+
+# Azure Key Vault name where ALL the Databricks workspace (DBX) tokens have been stored as secrets
+# By convention, DBX token keys use DBX name + '-tk'. Example: workspace Dbx-dev will have its token stored under key 'Dbx-dev-tk'.
+vaultName = kv-wdp-dev
+
+# Naming conventions adopted for the stored workspace secrets in regex form, to be used as a view filter 
+workspaceFilter = workspace-*
+
+# Exclude these workspaces from the filtered list, e.g.  temp PR workspaces
+workspaceFilterOut = workspace-*release-*
+
+# Workspace regions
+## Primary region
+workspaceRegion = northeurope
+## Secondary region
+workspaceRegion_2 = uksouth

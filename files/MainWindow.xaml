@@ -1,0 +1,114 @@
+﻿<Window x:Class="DBX_Admin.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DBX_Admin"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="619" Width="965"
+		WindowStartupLocation="CenterScreen">
+    <Grid Height="609" VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="331*"/>
+            <ColumnDefinition Width="80*"/>
+            <ColumnDefinition Width="46*"/>
+            <ColumnDefinition Width="508*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="359*"/>
+            <RowDefinition Height="96*"/>
+            <RowDefinition Height="154*"/>
+        </Grid.RowDefinitions>
+        <Label x:Name="Title" Content="Databricks Admin" HorizontalAlignment="Left" Margin="2,18,0,0" VerticalAlignment="Top" Width="160" FontSize="18" Grid.ColumnSpan="2" Grid.Column="2" Height="34"/>
+        <Image x:Name="dbxLogo" Height="65" Margin="0,6,223,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="66" Source="/dbks.png"/>
+        <Image x:Name="adminLogo" Grid.Column="3" HorizontalAlignment="Left" Height="48" Margin="10,58,0,0" VerticalAlignment="Top" Width="64" Source="/admin.png" RenderTransformOrigin="1.084,0.884"/>
+        <Label x:Name="Subs" Content="Subscriptions" HorizontalAlignment="Left" Margin="76,69,0,0" VerticalAlignment="Top" Width="100" FontSize="12" IsEnabled="False" Height="26"/>
+        <Label x:Name="Worksp" Content="Workspaces" HorizontalAlignment="Left" Margin="76,168,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.987,0.149" Width="100" IsEnabled="False" FontSize="12" Height="26"/>
+        <Label x:Name="Groups" Content="Groups" HorizontalAlignment="Left" Margin="37,168,0,0" VerticalAlignment="Top" FontSize="12" RenderTransformOrigin="0.286,-1.658" Grid.Column="1" Height="26" Width="48" Grid.ColumnSpan="2"/>
+        <ListBox x:Name="WList" Margin="76,208,60,0" Grid.ColumnSpan="2" Background="GhostWhite">
+            <ToolTipService.ToolTip >
+                <ToolTip Content="Select to display Groups." HorizontalOffset="10" VerticalOffset="20"/>
+            </ToolTipService.ToolTip>
+        </ListBox>
+        <Button x:Name="Add" Content="Add" Grid.Column="2" HorizontalAlignment="Left" Margin="29,48,0,0" Grid.Row="1" VerticalAlignment="Top" Height="25" Width="66" RenderTransformOrigin="-3.178,0.339" Background="GhostWhite" Grid.ColumnSpan="2"/>
+        <Button x:Name="Remove" Content="Remove" Grid.Column="3" HorizontalAlignment="Left" Margin="55,48,0,0" Grid.Row="1" VerticalAlignment="Top" Width="82" RenderTransformOrigin="0.489,0.043" Height="25" Background="GhostWhite"/>
+        <Button x:Name="Done" Content="Exit" Grid.Column="3" HorizontalAlignment="Left" Margin="374,77,0,0" Grid.Row="2" VerticalAlignment="Top" IsDefault="True" IsCancel="True" Width="60" RenderTransformOrigin="0.397,-0.324" Height="25" Background="GhostWhite"/>
+        <TextBox x:Name="CurrentUser" HorizontalAlignment="Left" Margin="85,48,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Grid.ColumnSpan="2" Height="25" Background="AliceBlue">
+            <ToolTipService.ToolTip >
+                <ToolTip Content="User email." HorizontalOffset="10" VerticalOffset="20"/>
+            </ToolTipService.ToolTip>
+        </TextBox>
+        <Label x:Name="Users" Content="Users" HorizontalAlignment="Left" Margin="79,168,0,0" VerticalAlignment="Top" FontSize="12" RenderTransformOrigin="0.286,-1.658" Height="34" Grid.Column="3" Width="39">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <ListBox x:Name="GList" Margin="35,208,442,0" Grid.ColumnSpan="3" Grid.Column="1" Background="GhostWhite">
+            <ToolTipService.ToolTip >
+                <ToolTip Content="Select to manage and display Users." HorizontalOffset="10" VerticalOffset="20"/>
+            </ToolTipService.ToolTip>
+        </ListBox>
+        <ListBox x:Name="UList" Margin="79,208,79,0" Grid.Column="3" Background="GhostWhite">
+            <ToolTipService.ToolTip >
+                <ToolTip Content="Select User to manage." HorizontalOffset="10" VerticalOffset="20"/>
+            </ToolTipService.ToolTip>
+        </ListBox>
+        <Calendar Grid.Column="3" HorizontalAlignment="Left" Margin="244,18,0,0" VerticalAlignment="Top" Height="156" Width="175"/>
+        <Button x:Name="ViewJobs" Content="Clusters/Jobs" Margin="49,36,0,0" VerticalAlignment="Top" Height="27" Background="GhostWhite" HorizontalAlignment="Left" Width="100" Grid.Column="3" RenderTransformOrigin="-7.055,8.082" Grid.Row="2"/>
+        <Button x:Name="AddG" IsEnabled="True" Content="Add" HorizontalAlignment="Left" Margin="219,38,0,0" Grid.Row="2" VerticalAlignment="Top" Height="25" Width="66" RenderTransformOrigin="-3.178,0.339" Background="GhostWhite"/>
+        <Button x:Name="RemoveG" IsEnabled="True" Content="Remove" HorizontalAlignment="Left" Margin="297,38,0,0" Grid.Row="2" VerticalAlignment="Top" Width="82" RenderTransformOrigin="0.489,0.043" Height="25" Background="GhostWhite" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="CurrentGroup" HorizontalAlignment="Left" Margin="88,39,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="122" Height="24" Background="AliceBlue">
+            <ToolTipService.ToolTip >
+                <ToolTip Content="Group name." HorizontalOffset="10" VerticalOffset="20"/>
+            </ToolTipService.ToolTip>
+        </TextBox>
+        <Button x:Name="Find" Content="Find" Grid.Column="1" HorizontalAlignment="Left" Margin="37,48,0,0" Grid.Row="1" VerticalAlignment="Top" Height="25" Width="66" RenderTransformOrigin="-3.178,0.339" Grid.ColumnSpan="2" Foreground="Brown" Background="GhostWhite">
+            <ToolTipService.ToolTip >
+                <ToolTip Content="List user memberships across all workspaces." HorizontalOffset="10" VerticalOffset="20"/>
+            </ToolTipService.ToolTip>
+        </Button>
+        <ListBox x:Name="Subscr" Margin="76,106,60,206" Grid.ColumnSpan="2" Background="GhostWhite">
+            <ToolTipService.ToolTip >
+                <ToolTip Content="Select to display Workspaces." HorizontalOffset="10" VerticalOffset="20"/>
+            </ToolTipService.ToolTip>
+        </ListBox>
+        <Button x:Name="kvPin" Background="Transparent" BorderThickness="0" Grid.Column="3" HorizontalAlignment="Left" Margin="375,44,0,0" VerticalAlignment="Top" Width="44" Height="42" Grid.Row="1">
+            <Image x:Name="kvClick" Source="/kv.png" Height="26" Width="37" />
+            <ToolTipService.ToolTip >
+                <ToolTip Content="List KeyVault configuration." HorizontalOffset="10" VerticalOffset="20"/>
+            </ToolTipService.ToolTip>
+        </Button>
+        <Button x:Name="vmPin" Background="Transparent" BorderThickness="0" Grid.Column="3" HorizontalAlignment="Left" Margin="321,44,0,0" VerticalAlignment="Top" Width="44" Height="42" Grid.Row="1">
+            <Image x:Name="vmClick" Source="/VM.png" Height="26" Width="37" />
+            <ToolTipService.ToolTip >
+                <ToolTip Content="Filter available VMs." HorizontalOffset="10" VerticalOffset="20"/>
+            </ToolTipService.ToolTip>
+        </Button>
+        <Button x:Name="ViewOutsiders" Content="Outsiders" HorizontalAlignment="Left" Margin="145,48,0,0" VerticalAlignment="Top" Width="80" Height="25" Background="GhostWhite" RenderTransformOrigin="12.804,9.242" Grid.Column="3" Grid.Row="1">
+            <ToolTipService.ToolTip >
+                <ToolTip Content="Find users outside of any group." HorizontalOffset="10" VerticalOffset="20"/>
+            </ToolTipService.ToolTip>
+        </Button>
+        <GroupBox Grid.Column="3" Header="Azure" Margin="314,21,74,151" Grid.Row="1" Grid.RowSpan="2"/>
+        <Button x:Name="accessWs" Content="Workspace" IsEnabled="True" HorizontalAlignment="Left" Margin="155,36,0,0" VerticalAlignment="Top" Width="80" Height="27" Background="GhostWhite" Grid.Column="3" Grid.Row="2"/>
+        <Button x:Name="ViewBulk" Content="Bulk Operations" IsEnabled="True" Margin="242,36,152,0" VerticalAlignment="Top" Height="27" Foreground="Brown" Background="GhostWhite" Grid.Column="3" Grid.Row="2">
+            <ToolTipService.ToolTip >
+                <ToolTip Content="Cross-workspace operations." HorizontalOffset="10" VerticalOffset="20"/>
+            </ToolTipService.ToolTip>
+        </Button>
+        <Button x:Name="CopyG" Content="Copy" IsEnabled="True" HorizontalAlignment="Left" Margin="60,38,0,0" VerticalAlignment="Top" Width="77" Height="25" Foreground="Brown" Background="GhostWhite" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3">
+            <ToolTipService.ToolTip >
+                <ToolTip Content="Copy groups to other workspaces." HorizontalOffset="10" VerticalOffset="20"/>
+            </ToolTipService.ToolTip>
+        </Button>
+        <GroupBox Header="Manage Users" Grid.Row="1" Grid.ColumnSpan="4" Margin="76,22,263,10"/>
+        <GroupBox Header="Manage Groups" Grid.Row="2" Grid.ColumnSpan="4" Margin="76,13,474,77"/>
+        <!--ProgressBar x:Name="Progress"  IsIndeterminate="True" Visibility="Hidden" Grid.ColumnSpan="3" Grid.Column="1" HorizontalAlignment="Left" Height="10" Margin="37,109,0,0" VerticalAlignment="Top" Width="100"/ -->
+
+    </Grid>
+</Window>

@@ -1,0 +1,23 @@
+<Window x:Class="DBX_Admin.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DBX_Admin"
+        mc:Ignorable="d"
+        Title="Security" Height="438" Width="524">
+    <Grid Margin="0,0,0,6" HorizontalAlignment="Center" Width="524">
+        <Image x:Name="kvLogo" Source ="/kv.png" HorizontalAlignment="Left" Height="42" Margin="32,22,0,0" VerticalAlignment="Top" Width="49"/>
+        <Label Content="Key Vault" HorizontalAlignment="Left" Margin="106,30,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.987,0.149" Width="68" IsEnabled="True" FontSize="12" Height="26"/>
+        <ComboBox x:Name="KVaults" HorizontalAlignment="Left" Margin="179,31,0,0" VerticalAlignment="Top" Width="211" Height="23"/>
+        <ListView x:Name="Secrets" Margin="106,100,134,0" Height="250" VerticalAlignment="Top" Background="GhostWhite">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Workspace Secrets"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="CloseSec" IsDefault="True" IsCancel="True" Content="Close" HorizontalAlignment="Left" Margin="428,325,0,0" VerticalAlignment="Top" Height="25" Width="56" RenderTransformOrigin="-0.232,0.295" Background="GhostWhite"/>
+
+    </Grid>
+</Window>

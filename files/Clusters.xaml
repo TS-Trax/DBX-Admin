@@ -1,0 +1,54 @@
+<Window x:Class="DBX_Admin.JobClusters"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DBX_Admin"
+        mc:Ignorable="d"
+        Title="Clusters" Height="547" Width="1041"  
+		WindowStartupLocation="CenterScreen">
+    <Grid Height="551" VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="329*"/>
+            <ColumnDefinition Width="712*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="WksTitle" Content="Workspace" HorizontalAlignment="Left" Margin="118,26,0,0" VerticalAlignment="Top" Width="542" FontSize="18" Height="34" Grid.ColumnSpan="2"/>
+        <Image x:Name="dbxLogo" Height="66" Margin="0,10,216,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="66" Source="/dbks.png" RenderTransformOrigin="-6.328,0.576"/>
+        <Button x:Name="jobPin" Background="Transparent" BorderThickness="0" Grid.Column="1" HorizontalAlignment="Left" Margin="560,85,0,0" VerticalAlignment="Top" Width="65" Height="55">
+            <Image x:Name="jobClick" Source="/job.png" Height="55" Width="65" RenderTransformOrigin="0.413,2.997" />
+			<ToolTipService.ToolTip >
+					<ToolTip Content="List all jobs in this workspace." HorizontalOffset="10" VerticalOffset="20"/>
+			</ToolTipService.ToolTip>
+        </Button>
+        <ListBox x:Name="ClusterList" Margin="76,106,22,159"  Background="GhostWhite">
+			<ToolTipService.ToolTip >
+					<ToolTip Content="Select cluster to display details." HorizontalOffset="10" VerticalOffset="20"/>
+			</ToolTipService.ToolTip>
+		</ListBox>
+        <Button x:Name="Close" Content="Close" IsDefault="True" IsCancel="True" HorizontalAlignment="Left" Margin="559,451,0,0" VerticalAlignment="Top" Height="26" Width="76" RenderTransformOrigin="0.733,-0.652" Grid.Column="1" Background="GhostWhite"/>
+        <Label Content="Clusters" HorizontalAlignment="Left" Margin="144,67,0,0" VerticalAlignment="Top" Width="96"/>
+        <Label x:Name="CSelection" Content="Selection" HorizontalAlignment="Left" Margin="111,443,0,0" VerticalAlignment="Top" Width="184"/>
+        <Button x:Name="CStop" Content="Stop" HorizontalAlignment="Left" Margin="282,445,0,0" VerticalAlignment="Top" Width="80" Height="22" Grid.Column="1" Background="GhostWhite"/>
+        <Button x:Name="CDelete" Content="Delete" HorizontalAlignment="Left" Margin="374,445,0,0" VerticalAlignment="Top" Width="80" Height="22" Grid.Column="1" Background="GhostWhite"/>
+        <Button x:Name="CStart" Content="Start" HorizontalAlignment="Left" Margin="96,445,0,0" VerticalAlignment="Top" Width="80" Height="22" Grid.Column="1" Background="GhostWhite"/>
+        <Button x:Name="CRestart" Content="Restart" HorizontalAlignment="Left" Margin="187,445,0,0" VerticalAlignment="Top" Height="22" Width="80" Grid.Column="1" Background="GhostWhite"/>
+        <Label x:Name="SparkVersion" Content="Spark Version" Foreground="Navy" HorizontalAlignment="Left" Margin="51,193,0,0" VerticalAlignment="Top" Width="500" Grid.Column="1" />
+        <Label x:Name="DriverNode" Content="Driver Node"  Foreground="Navy" HorizontalAlignment="Left" Margin="51,213,0,0" VerticalAlignment="Top" Width="500" Grid.Column="1" />
+        <Label x:Name="NodeType" Content="Node Type"  Foreground="Navy" HorizontalAlignment="Left" Margin="51,233,0,0" VerticalAlignment="Top" Width="500" Grid.Column="1" />
+        <Label x:Name="AutoTerm" Content="Auto-termination (min)"  Foreground="Navy" HorizontalAlignment="Left" Margin="51,253,0,0" VerticalAlignment="Top" Width="500" Grid.Column="1" />
+        <Label x:Name="State" Content="State"  Foreground="Navy" HorizontalAlignment="Left" Margin="51,273,0,0" VerticalAlignment="Top" Width="500" Grid.Column="1" />
+        <Label x:Name="StateMsg" Content="State Message"  Foreground="Navy" HorizontalAlignment="Left" Margin="51,295,0,0" VerticalAlignment="Top" Width="500" Grid.Column="1" />
+        <Label x:Name="Autoscale" Content="Autoscale"  Foreground="Navy" HorizontalAlignment="Left" Margin="51,313,0,0" VerticalAlignment="Top" Width="500" Grid.Column="1" />
+        <Label x:Name="TermReason" Content="Termination Reason"  Foreground="Navy" HorizontalAlignment="Left"  Margin="51,333,0,0" VerticalAlignment="Top" Width="500" Grid.Column="1" />
+        <GroupBox Header="Control" Margin="80,414,226,68" Grid.ColumnSpan="2"/>
+        <Button x:Name="CSlibs" Content="Libraries" HorizontalAlignment="Left" Margin="0,445,0,0" VerticalAlignment="Top" Width="80" Height="22" Background="GhostWhite" Grid.Column="1"/>
+        <GroupBox Grid.Column="1" Header="Jobs" Margin="560,67,78,411"/>
+        <Label Content="From" Grid.Column="1" HorizontalAlignment="Left" Margin="51,102,0,0" VerticalAlignment="Top" Width="45"/>
+        <ComboBox x:Name="CopyFrom" Grid.Column="1" HorizontalAlignment="Left" Margin="95,106,0,0" VerticalAlignment="Top" Width="125"/>
+        <Label Content="To" Grid.Column="1" HorizontalAlignment="Left" Margin="227,100,0,0" VerticalAlignment="Top" Width="45"/>
+        <ComboBox x:Name="CopyTo" Grid.Column="1" HorizontalAlignment="Left" Margin="259,106,0,0" VerticalAlignment="Top" Width="126"/>
+        <Button x:Name="CopyLibs" Content="Copy" Grid.Column="1" HorizontalAlignment="Left" Margin="427,104,0,0" VerticalAlignment="Top" Width="80" Height="22" Background="GhostWhite"/>
+        <GroupBox Grid.Column="1" Header="Copy Libraries between clusters" Margin="40,67,171,411"/>
+        <GroupBox x:Name="ClusterDetails" Header="Cluster Details" Margin="41,159,171,159" Grid.Column="1"/>
+    </Grid>
+</Window>
