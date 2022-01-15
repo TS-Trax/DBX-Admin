@@ -81,7 +81,7 @@ Here, we could just enter the user email _some.ds@domain.com_ in the text box an
 Although this is faster than performing a login in each workspace to add that user, there is still a simpler and faster way to do this, by using 'Bulk Operations'.
 First, we can do a quick check on an existing Data Scientist memberships by using the cross-workspace 'Find' feature:
 
-<img width="416" alt="image" src="https://user-images.githubusercontent.com/97665470/149617302-02d088b3-ac64-4629-beb8-abd4066a99bd.png">
+<img width="412" alt="image" src="https://user-images.githubusercontent.com/97665470/149617394-04be77ee-0d54-4f3c-9b04-3551a99d6fc3.png">
 
 
 We can see that the DS groups are spelled slightly differently. This happens often in the real-world, so the tool needs to find a way to still match those group names when performing a _bulk Add_ operation. The way it does that is by using **fuzzy-matching** using a group pattern in the 'Bulk Operations' window:
@@ -94,7 +94,8 @@ The tool will fuzzy-match the group pattern 'Data Scientist' with 'Data Scientis
 ### Example usage #2: Add a group of new Analysts to the corresponding groups in all selected workspaces
 This is similar to the previous scenario, as it uses the 'Bulk Operations' window. Only in this case, we're adding a whole group of users at the same time. The only prerequisite to perform this task is to have previously set up a simple text file with one user per line. In the 'Group' tab, we use the 'Load File' button to get those users. 
 
-<img width="412" alt="image" src="https://user-images.githubusercontent.com/97665470/149617354-dde08a2b-5786-474b-be76-75554ad5414a.png">
+<img width="455" alt="image" src="https://user-images.githubusercontent.com/97665470/149617409-f9518762-7312-4668-8145-52e76cf27120.png">
+
 
 
 The bulk 'Add' operation will fuzzy-match the group entered with existing ones. The operation will only take seconds.
