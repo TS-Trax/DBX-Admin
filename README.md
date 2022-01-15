@@ -99,7 +99,7 @@ This is similar to the previous scenario, as it uses the 'Bulk Operations' windo
 The bulk 'Add' operation will fuzzy-match the group entered with existing ones. The operation will only take seconds.
 
 ### Example usage #3: Generate a global report that includes cluster running in Production, with job failures, used VM types and runtime versions
-This is yet another case where the 'Bulk Operations' window comes in handy. We first use the Inlcude/Exclude filters to get the list of workspaces we want to investigate. We then run the checks in the corresponding tabs, e.g. for the Runtime tab:
+This is yet another case where the 'Bulk Operations' window comes in handy. We first use the _Include/Exclude_ filters to get the list of workspaces we want to investigate. We then run the checks in the corresponding tabs, e.g. for the Runtime tab:
 
 <img width="516" alt="image" src="https://user-images.githubusercontent.com/97665470/149616844-c4f05b43-c0b7-42ca-9c8c-efa960d3acaf.png">
 
