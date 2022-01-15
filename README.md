@@ -75,3 +75,25 @@ The DBX-Admin Azure login has two modes: prod (default) & dev, controlled by the
 **Note**: The start up process will be slow, specially the first time, since missing modules will need to be installed by the tool if not present. Subsequent starts will be faster, though the tool will still need to retrieve the tokens from the key vault each time it starts.
 
 
+### Example usage: Add a new Data Scientist to the corresponding groups in all selected workspaces
+Here, we could just enter the user email _some.ds@domain.com_ in the text box and click on the different workspaces, adding that user everytime.
+
+Although this is faster than performing a login in each workspace to add that user, there is still a simpler and faster way to do this, by using 'Bulk Operations'.
+First, we can do a quick check on an existing Data Scientist memberships by using the cross-workspace 'Find' feature:
+
+<img width="422" alt="image" src="https://user-images.githubusercontent.com/97665470/149615699-59b37394-1e12-430c-a4cd-044937383e7e.png">
+
+
+We can see that the DS groups are spelled slightly differently. This happens often in the real-world, so the tool needs to find a way to still match those group names when performing a _bulk Add_ operation. The way it does that is by using **fuzzy-matching** using a group pattern in the 'Bulk Operations' window:
+
+<img width="516" alt="image" src="https://user-images.githubusercontent.com/97665470/149615182-bb1aff0c-ea55-4fe6-ac61-54d10fca2a89.png">
+
+The tool will fuzzy-match the group pattern 'Data Scientist' with 'Data Scientists', 'data scientist' and 'data science'. Where there is no fuzzy match, the workspace is simply skipped. The _bulk Add_ will only take a few seconds to perform the task.
+
+
+### Example usage: Add a group of new Analysts to the corresponding groups in all selected workspaces
+This is similar to the previous scenario, as it uses the 'Bulk Operations' window. Only in this case, we're adding a whole group of users at the same time. The only prerequisite to perform this task is to have previously set up a simple text file with one user per line. In the 'Group' tab, we use the 'Load File' button to get those users. 
+
+<img width="457" alt="image" src="https://user-images.githubusercontent.com/97665470/149616265-c0ec8f83-cd12-4423-9dc7-ae225828ec53.png">
+
+The bulk 'Add' operation will fuzzy-match the group entered with existing ones. The operation will only take seconds.
