@@ -75,7 +75,7 @@ The DBX-Admin Azure login has two modes: prod (default) & dev, controlled by the
 **Note**: The start up process will be slow, specially the first time, since missing modules will need to be installed by the tool if not present. Subsequent starts will be faster, though the tool will still need to retrieve the tokens from the key vault each time it starts.
 
 
-### Example usage: Add a new Data Scientist to the corresponding groups in all selected workspaces
+### Example usage #1: Add a new Data Scientist to the corresponding groups in all selected workspaces
 Here, we could just enter the user email _some.ds@domain.com_ in the text box and click on the different workspaces, adding that user everytime.
 
 Although this is faster than performing a login in each workspace to add that user, there is still a simpler and faster way to do this, by using 'Bulk Operations'.
@@ -91,9 +91,24 @@ We can see that the DS groups are spelled slightly differently. This happens oft
 The tool will fuzzy-match the group pattern 'Data Scientist' with 'Data Scientists', 'data scientist' and 'data science'. Where there is no fuzzy match, the workspace is simply skipped. The _bulk Add_ will only take a few seconds to perform the task.
 
 
-### Example usage: Add a group of new Analysts to the corresponding groups in all selected workspaces
+### Example usage #2: Add a group of new Analysts to the corresponding groups in all selected workspaces
 This is similar to the previous scenario, as it uses the 'Bulk Operations' window. Only in this case, we're adding a whole group of users at the same time. The only prerequisite to perform this task is to have previously set up a simple text file with one user per line. In the 'Group' tab, we use the 'Load File' button to get those users. 
 
 <img width="457" alt="image" src="https://user-images.githubusercontent.com/97665470/149616265-c0ec8f83-cd12-4423-9dc7-ae225828ec53.png">
 
 The bulk 'Add' operation will fuzzy-match the group entered with existing ones. The operation will only take seconds.
+
+### Example usage #3: Generate a global report that includes cluster running in Production, with job failures, used VM types and runtime versions
+This is yet another case where the 'Bulk Operations' window comes in handy. We first use the Inlcude/Exclude filters to get the list of workspaces we want to investigate. We then run the checks in the corresponding tabs, e.g. for the Runtime tab:
+
+<img width="516" alt="image" src="https://user-images.githubusercontent.com/97665470/149616844-c4f05b43-c0b7-42ca-9c8c-efa960d3acaf.png">
+
+When done with the checks, we can summarize all the results by using the 'Generate Report', where we can choose the file format (Text or MS Word). The tool will automatically detect the content and check the corresponding boxes. If for instance we only checked for running clusters and runtime versions, we will get the following window:
+
+<img width="441" alt="image" src="https://user-images.githubusercontent.com/97665470/149616918-44f2497c-74f0-4c85-87c8-8cb626d11058.png">
+
+We can then send that audit report to whoever has requested it.
+
+
+
+
