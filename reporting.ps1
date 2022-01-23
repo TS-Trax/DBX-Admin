@@ -122,6 +122,8 @@ $var_CreateR.Add_Click({
         return;
     }
     createReport 
+    # Automatically close the window after report is generated
+    $Null = $window_R.Close()
 })
 
 
