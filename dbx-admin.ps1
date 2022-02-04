@@ -384,7 +384,7 @@ $var_ClearLists.Add_Click({
 
 $var_Find.Add_Click( {
 
-    $usr = $var_CurrentUser.text.ToString()
+    $usr = get_text $var_CurrentUser
 
     if( [string]::IsNullOrEmpty($usr) ){
         $msg = "Nothing to Find"
@@ -463,7 +463,7 @@ $var_Add.Add_Click( {
     $tk    = $dbksTokens[$dbks]
     set-DbxEnv($tk)
     printGlobals
-    $usr = $var_CurrentUser.text.ToString()
+    $usr = get_text $var_CurrentUser
 
     $existingUsers = Get-DatabricksGroupMembers -GroupName $group | 
                         Select-Object -ExpandProperty user_name -ErrorAction SilentlyContinue
@@ -489,13 +489,13 @@ $var_Add.Add_Click( {
         return;
     }
     else{
-        $msg = "Add user " + $usr + " to group " + $group + " in " + $dbks + "?"
+        $msg = "Add user '" + $usr + "' to group " + $group + " in " + $dbks + "?"
         if( -not (showConfirmDialog  $msg) ){
             return;
         }
         else{ # ADD USER ----------------------------------------------------------------
             try{
-                Write-Host ("Adding user " + $usr + " to group " + $group + " in  " + $dbks)
+                Write-Host ("Adding user '" + $usr + "' to group " + $group + " in  " + $dbks)
                 # This is from the cicd.tools module. No equiv. in the DatabricksPS package.
                 # If the user already exists the error will be ignored, but the entitlments and groups- if requested - will not be applied
                 # So do not use this method to assign to groups, only to add to the workspace.
@@ -505,7 +505,7 @@ $var_Add.Add_Click( {
                 # Use this method to add to Group
                 Add-DatabricksGroupMember -UserName $usr -ParentGroupName $group
                 $var_UList.Items.Add($usr)
-                showMsg ("User " + $usr + " added to group " + $group + " in  " + $dbks)
+                showMsg ("User '" + $usr + "' added to group " + $group + " in  " + $dbks)
                 return;
             }
             catch [Exception]{
@@ -528,7 +528,7 @@ $var_Remove.Add_Click( {
     $tk    = $dbksTokens[$dbks]
     set-DbxEnv($tk)
     printGlobals; #Write-Host("TOKEN: " + $tk)
-    $usr = $var_CurrentUser.text.ToString()
+    $usr = get_text $var_CurrentUser
 
     if( [string]::IsNullOrEmpty($usr) ){
         $msg = "Nothing to Remove"
@@ -583,7 +583,7 @@ $var_AddG.Add_Click( {
     $tk    = $dbksTokens[$dbks]
     set-DbxEnv($tk)
     printGlobals
-    $grp = $var_CurrentGroup.text.ToString()
+    $grp = get_text $var_CurrentGroup
     $existingGrps = Get-DatabricksGroups -BearerToken $tk 
 
     if( [string]::IsNullOrEmpty($grp) ){
@@ -597,16 +597,16 @@ $var_AddG.Add_Click( {
         return;
     }
     else{
-        $msg = "Add group" + $grp + " to workspace " + $dbks + "?"
+        $msg = "Add group '" + $grp + "' to workspace " + $dbks + "?"
         if( -not (showConfirmDialog  $msg) ){
             return;
         }
         else{ # ADD GROUP ----------------------------------------------------------------
             try{
-                Write-Host ("Adding group " + $grp + " to workspace " + $dbks)
+                Write-Host ("Adding group '" + $grp + "' to workspace " + $dbks)
                 Add-DatabricksGroup -BearerToken $tk -GroupName $grp
                 $var_GList.Items.Add($grp) 
-                showMsg ("Group " + $grp + " added to workspace " + $dbks)
+                showMsg ("Group '" + $grp + "' added to workspace " + $dbks)
                 return;
             }
             catch [Exception]{
@@ -628,7 +628,7 @@ $var_RemoveG.Add_Click( {
     $tk    = $dbksTokens[$dbks]
     set-DbxEnv($tk)
     printGlobals
-    $grp = $var_CurrentGroup.text.ToString()
+    $grp = get_text $var_CurrentGroup
     $existingGrps = Get-DatabricksGroups -BearerToken $tk 
 
     if( [string]::IsNullOrEmpty($grp)){
@@ -694,7 +694,7 @@ $var_CopyG.Add_Click({
     $tk    = $dbksTokens[$dbks]
     set-DbxEnv($tk)
     printGlobals
-    $grp = $var_CurrentGroup.text.ToString()
+    $grp = get_text $var_CurrentGroup
     $existingGrps = Get-DatabricksGroups -BearerToken $tk 
 
     if( [string]::IsNullOrEmpty($grp)){
