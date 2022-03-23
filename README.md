@@ -111,6 +111,12 @@ When done with the checks, we can summarize all the results by using the 'Genera
 
 We can then send that audit report to whoever has requested it.
 
+### Other common usage
+**Remove a user who has left the project from all workspaces**:
+1. Open Bulk operations window
+2. List all relevant workspaces using include/exclude filters
+3. Go to 'Purge' tab, enter the user email  and click the 'Remove Permanently' button
+
 
 
 
