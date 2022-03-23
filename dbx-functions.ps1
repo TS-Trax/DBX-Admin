@@ -8,14 +8,11 @@
 $config = Get-Content -Path .\files\dbx-admin-config.txt 
 $config | Where-Object {$_.length -gt 0} | Where-Object {!$_.StartsWith("#")} | ForEach-Object{
     $var = $_.Split('=',2).Trim()
-    # Prevent 'var already exists' error - Comment this condition out the first time adding a new entry
-    if(  [string]::IsNullOrEmpty($global:KV) `
-    -and [string]::IsNullOrEmpty($global:FILTER) `
-    -and [string]::IsNullOrEmpty($global:FILTER_OUT) `
-    -and [string]::IsNullOrEmpty($global:REGION) `
-    -and [string]::IsNullOrEmpty($global:REGION_2)){
-
-         New-Variable -Name $var[0] -Value $var[1]
+    # Prevent 'var already exists' error 
+    if (Get-Variable $var[0] -Scope 'Global' -ErrorAction 'Ignore') {
+        Set-Variable -Name $var[0] -Value $var[1]
+    } else {
+        New-Variable -Name $var[0] -Value $var[1]
     }
 }
 #$vaultName = 'kv-wdp-dev'
@@ -46,8 +43,8 @@ if( not_set $workspaceRegion){
 # --------------------------------------------------------
 
 $global:KV = $vaultName
-$global:FILTER = $workspaceFilter         #.split(',')   # Multiple filters (TODO)
-$global:FILTER_OUT = $workspaceFilterOut  #.split(',')   # Multiple filters (TODO)
+$global:FILTER = $workspaceFilter           
+$global:FILTER_OUT = $workspaceFilterOut.split(',') # Multiple exclude filters 
 $global:REGION = $workspaceRegion
 $global:REGION_2 = $workspaceRegion_2
 
@@ -113,22 +110,25 @@ function set-DbxEnvAny($token, $dbx){
 
 # -------------------------------------
 function get-AllDBKS(){
-    return Get-AzResource -ResourceType 'Microsoft.Databricks/workspaces' |  
-                            Where-Object Name  -Like $global:FILTER | 
-                            Where-Object Name  -NotLike $global:FILTER_OUT
-
-   <# Multiple filters (TODO) ---------------------------------------------
+    
+   # Multiple filters ---------------------------------------------
     $allWs = Get-AzResource -ResourceType 'Microsoft.Databricks/workspaces' 
     $resultsIn = @()
     $global:FILTER | ForEach-Object{
-       $resultsIn += ( $allWs|  Where-Object Name  -Like $_ )
+        $resultsIn += ( $allWs|  Where-Object Name  -Like $_ )
     }
     $results = @()
+    $count = 1
     $global:FILTER_OUT | ForEach-Object{
-       $results += ( $resultsIn |  Where-Object Name  -NotLike $_ )
+        if($count -eq 1){
+            $results = ( $resultsIn |  Where-Object Name  -NotLike $_.Trim() )
+            $count = $count + 1
+        }
+        else{
+            $results = ( $results |  Where-Object Name  -NotLike $_.Trim() )
+        }
     }
-   return $results;
-   ---------------------------------------------------------------------#>
+   return $results; 
 }
 
 # -------------------------------------
@@ -158,23 +158,7 @@ function get-DbxGroups($dbx){
     }
 }
 
-# --------------------------------------
-function get-ExcludedDbx(){
-
-    return Get-AzResource -ResourceType 'Microsoft.Databricks/workspaces' |   
-                             Where-Object Name  -Like $global:FILTER_OUT
-}
-# --------------------------------------
-function get-ExcludedDbxNames(){
-    $excl = get-ExcludedDbx
-    $ExclNames = @()
-    $ExclNames.Clear()
-    $excl | ForEach-Object{       
-        $ExclNames += $_.Name
-      }
-    return $ExclNames | Sort-Object
-}
-# Call test
-#get-ExcludedDbxNames
 
 
+# TEST 
+#get-AllDBKSnames

@@ -14,7 +14,8 @@ vaultName = kv-wdp-dev
 workspaceFilter = workspace-*
 
 # Exclude these workspaces from the filtered list, e.g.  temp PR workspaces
-workspaceFilterOut = workspace-*release-*
+# If more than one filter, use a comma-separated list i.e. filterout1, filterout2,...
+workspaceFilterOut = workspace-*release-*, workspace-*datavalidation*, workspace-pullrequest*
 
 # Workspace regions
 ## Primary region
