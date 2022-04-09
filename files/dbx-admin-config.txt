@@ -22,3 +22,6 @@ workspaceFilterOut = workspace-*release-*, workspace-*datavalidation*, workspace
 workspaceRegion = northeurope
 ## Secondary region
 workspaceRegion_2 = uksouth
+
+# In case only a subset of the available Azure subscriptions is of interest (default is all accessible subscriptions)
+subscriptionFilter = *
