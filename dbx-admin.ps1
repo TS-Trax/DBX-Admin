@@ -301,8 +301,8 @@ function show_standalone_users ($dbx){
 ## -------------------------- WORKSPACES -----------------------------------------------------------------------------
 
 try{    
-    $subs = Az.Accounts\Get-AzSubscription
-    Foreach ($sub in $subs){ $var_Subscr.Items.Add($sub.Name);}
+    $subs = getSubscriptions
+    Foreach ($sub in $subs){ $var_Subscr.Items.Add($sub);}
 }
 catch{
     Write-Host 'Could not get subscriptions. Prompting to login.'
@@ -403,11 +403,11 @@ $var_Find.Add_Click( {
         #  Get all Dbx 
         $allDbx = @()
         $Win.Title = "Retrieving subscriptions..."
-        $sub = Get-AzSubscription
+        $sub = getSubscriptions
         Write-Host ("Subs: " + $sub)
         $Win.Title = "Retrieving workspaces in each subscription..."
         foreach($s in $sub){
-            Get-AzSubscription -SubscriptionName $s.Name | Set-AzContext
+            Get-AzSubscription -SubscriptionName $s | Set-AzContext
             $allDbx += get-AllDBKSnames
         }
         Write-Host ("Retrieved  " + $allDbx.Count + " workspaces from all subs")

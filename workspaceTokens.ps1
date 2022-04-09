@@ -44,7 +44,7 @@ $window_splash.Show() ##############################
 show_progress #---------
 $Win.Title = "Retrieving tokens for all workspaces..."
 
-$subs = Get-AzSubscription
+$subs = getSubscriptions
 Foreach ($sub in $subs){
   Set-AzContext -SubscriptionName $sub
   $Win.Title = "Getting in " + $sub.Name + "..."

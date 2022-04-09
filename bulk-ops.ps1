@@ -241,11 +241,11 @@ $var_SearchWG.Add_Click( {
     [void] $var_SearchResultsB.Items.clear()
 
     $Win.Title = "Searching Subscriptions..."
-    $sub = Get-AzSubscription
+    $sub = getSubscriptions
     if( $global:cacheList.Count -eq 0){
         $initList = @()
         foreach($s in $sub){
-            Get-AzSubscription -SubscriptionName $s.Name | Set-AzContext
+            Get-AzSubscription -SubscriptionName $s | Set-AzContext
             $initList += get-AllDBKS
             <#
             $initList | ForEach-Object{
@@ -432,25 +432,29 @@ $var_PurgeB.Add_Click({
         return;
     } 
      # It is a remove op, seek confirmation  
-    $msg = "Remove user from all listed worspaces?"
+    $msg = "Remove " + $usr +" from all listed worspaces?"
     if( -not (showConfirmDialog  $msg) ){
         return;
     }
     show_progress
-    $Win.Title = "Removing user..."
+    $Win.Title = "Removing " + $usr + "..."
     #
     $global:results | ForEach-Object{
 
+        show_progress
+        $Win.Title = ("Processing " + $_.Name + "...")
         $tok = $dbksTokens[$_.Name] 
         set-DbxEnvAny $tok $_.Name
-        
-        $Win.Title = ("Processing " + $_.Name + "...")
         try{
             $userNameId = Get-DatabricksSCIMUser | Select-Object userName, id | Where-Object userName  -Like $usr
-
-            Write-Host ("Found entry " + $userNameId + " and ID = " + $userNameId.id)
-            Remove-DatabricksSCIMUser -UserID $userNameId.id
-            $Win.Title = ("Removed user in "  + $_.Name + ".")
+            if($userNameId){
+                Write-Host ("Found entry " + $userNameId)
+                Remove-DatabricksSCIMUser -UserID $userNameId.id
+                Write-Host("Removed user in "  + $_.Name + ".")
+            }
+            else{
+                Write-Host "Entry not found."
+            }
         }
         catch [Exception]{
             Write-Debug $_
@@ -461,7 +465,7 @@ $var_PurgeB.Add_Click({
     }  
     #
     hide_progress
-    showMsg 'User removed from all listed workspaces'
+    showMsg ('User ' + $usr + ' was either not found, or removed from all listed workspaces.')
 
 })
 

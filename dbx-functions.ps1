@@ -15,13 +15,15 @@ $config | Where-Object {$_.length -gt 0} | Where-Object {!$_.StartsWith("#")} | 
         New-Variable -Name $var[0] -Value $var[1]
     }
 }
-#$vaultName = 'kv-wdp-dev'
+
 $reading = "Reading from dbx-admin-config: "
 $reading += "'" + $vaultName  + "'" + ", '" 
 $reading += $workspaceFilter + "'" + ", '" 
 $reading += $workspaceFilterOut + "'" + ", '" 
 $reading += $workspaceRegion + "'" + ", '" 
-$reading += $workspaceRegion_2 + "'"  
+$reading += $workspaceRegion_2 + "'"  + ", '" 
+$reading += $subscriptionFilter + "'" 
+
 
 Write-Host $reading
 
@@ -40,6 +42,9 @@ if( not_set $workspaceFilterOut){
 if( not_set $workspaceRegion){
     $workspaceRegion = 'northeurope'
 }
+if( not_set $subscriptionFilter){
+    $subscriptionFilter = '*'       # If empty, match all
+}
 # --------------------------------------------------------
 
 $global:KV = $vaultName
@@ -47,6 +52,7 @@ $global:FILTER = $workspaceFilter
 $global:FILTER_OUT = $workspaceFilterOut.split(',') # Multiple exclude filters 
 $global:REGION = $workspaceRegion
 $global:REGION_2 = $workspaceRegion_2
+$global:SUB_FILTER = $subscriptionFilter 
 
 #------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -70,14 +76,18 @@ $global:SEL_REGION #
 $global:dbxRegions = @{}
 function get-Region($dbx){
 
+    #Write-Host ('Retrieving region for workspace: ' + $dbx)
+
     if( $global:dbxRegions.ContainsKey($dbx) ){
+        #Write-Host ('Retrieving region from cache: ' + $global:dbxRegions[$dbx])
         return $global:dbxRegions[$dbx]
     }
     else{
         $res = Get-AzResource -ResourceType 'Microsoft.Databricks/workspaces' |  
                                 Where-Object Name  -eq $dbx
 
-        $global:dbxRegions[$dbx] = $res.Location
+        #Write-Host ('Retrieving region - cache miss: ' + $res.Location)                        
+        $global:dbxRegions.add($dbx, $res.Location)
         return $res.Location
     }
 }
@@ -133,6 +143,7 @@ function get-AllDBKS(){
 
 # -------------------------------------
 function get-AllDBKSnames(){
+
     $alldbks = get-AllDBKS 
     $alldbksNames = @()
     $alldbksNames.Clear()
@@ -145,6 +156,7 @@ function get-AllDBKSnames(){
 
 # --------------------------------------
 function get-DbxGroups($dbx){
+
     $tk = $dbksTokens[$dbx] 
     #write-Host ("TOKEN FOR " + $sel + ": " + $tk)
     $region = get-Region $dbx
@@ -158,7 +170,18 @@ function get-DbxGroups($dbx){
     }
 }
 
+$global:subList = @() # CACHE
+function getSubscriptions{
+    if( $global:subList.Count -eq 0){
+        $subs = Az.Accounts\Get-AzSubscription | Where-Object Name  -Like $global:SUB_FILTER
+        foreach($s in $subs){
+            $global:subList += $s.Name
+        }
+    }
+    return $global:subList
+}
 
 
 # TEST 
 #get-AllDBKSnames
+#getSubscriptions
